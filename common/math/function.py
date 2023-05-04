@@ -24,7 +24,9 @@ class Function:
     def max(self, segment: Segment) -> Decimal:
         left = self(segment.left)
         right = self(segment.right)
-        inner_max = Decimal(optimize.fminbound(lambda x: float((-self)(x)), float(segment.left), float(segment.right)))
+        inner_max = self(Decimal(optimize.fminbound(
+            lambda x: float((-self)(x)), float(segment.left), float(segment.right)
+        )))
         return max(left, right, inner_max)
 
     def __call__(self, arg) -> Decimal:
